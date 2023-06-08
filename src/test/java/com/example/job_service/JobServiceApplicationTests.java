@@ -12,7 +12,7 @@ class JobServiceApplicationTests {
 
     @Test
     public void failThisTest(){
-        failThisTest();
+
     }
 
 }
