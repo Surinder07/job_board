@@ -1,6 +1,6 @@
 package com.example.job_service.service;
 
-import com.example.job_service.model.CustomerUserDetails;
+import com.example.job_service.model.CustomeUserDetails;
 import com.example.job_service.model.User;
 import com.example.job_service.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +21,6 @@ public class CustomUserDetailService implements UserDetailsService {
 
         Optional<User> user = userRepo.findUserByEmail(email);
         user.orElseThrow(() -> new UsernameNotFoundException("User not Exists"));
-        return user.map(CustomerUserDetails::new).get();
+        return user.map(CustomeUserDetails::new).get();
     }
 }

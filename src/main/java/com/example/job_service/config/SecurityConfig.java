@@ -1,7 +1,6 @@
 package com.example.job_service.config;
 
 import com.example.job_service.service.CustomUserDetailService;
-import org.apache.coyote.Adapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +9,11 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
+
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
 
 
 @Configuration
@@ -28,34 +28,24 @@ public class SecurityConfig {
 
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/index", "/register/**","/login").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/", "/register","/login").permitAll()
+                        .requestMatchers("/admin").hasRole("USER")
+                        .anyRequest()
+                        .authenticated()
                 )
-                .headers(s->s.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .formLogin(login -> login
                         .loginPage("/login").permitAll()
-                        .loginProcessingUrl("/login")
+                                .failureUrl("/login?error=ture")
                         .defaultSuccessUrl("/admin")
+                                .usernameParameter("email")
+                                .passwordParameter("password")
                         )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll()).build()
-                ;
-/*        return    http.csrf(csrf-> csrf.ignoringRequestMatchers("/h2-console/**")).authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/index", "/register/**","/h2-console/**").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
-                )
-                .headers(headers -> headers.frameOptions().sameOrigin())
-                .formLogin(login -> login
-                        .loginPage("/login").permitAll()
-                        .loginProcessingUrl("/login")
-                        .defaultSuccessUrl("/admin")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                        .permitAll()).build()
-                ;*/
-
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID"))
+                .build();
 
     }
 
@@ -64,6 +54,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    @Autowired
     public void config(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(customUserDetailService);
     }

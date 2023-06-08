@@ -4,11 +4,13 @@ import com.example.job_service.model.Role;
 import com.example.job_service.model.User;
 import com.example.job_service.repo.RoleRepo;
 import com.example.job_service.repo.UserRepo;
+import com.example.job_service.service.CustomUserDetailService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -52,6 +54,12 @@ public class LoginController {
         request.login(user.getEmail(), password);
 
         return ("redirect:/");
+    }
+    @GetMapping("/admin")
+    public String registeredUsers(Model model){
+        List<User> users = userRepo.findAll();
+        model.addAttribute("users", users);
+        return "admin";
     }
 
 

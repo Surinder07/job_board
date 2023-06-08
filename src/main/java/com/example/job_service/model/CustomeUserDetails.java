@@ -8,9 +8,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class CustomerUserDetails extends User implements UserDetails {
+public class CustomeUserDetails extends User implements UserDetails {
 
-    public CustomerUserDetails(User users) {
+    public CustomeUserDetails(User users) {
         super(users);
     }
 
