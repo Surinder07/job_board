@@ -15,7 +15,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 
-
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
@@ -28,18 +27,18 @@ public class SecurityConfig {
 
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/register","/login").permitAll()
-                        .requestMatchers("/admin").hasRole("USER")
+                        .requestMatchers("/", "/register", "/login").permitAll()
+                        .requestMatchers("/user").hasRole("USER")
                         .anyRequest()
                         .authenticated()
                 )
                 .formLogin(login -> login
                         .loginPage("/login").permitAll()
-                                .failureUrl("/login?error=ture")
-                        .defaultSuccessUrl("/admin")
-                                .usernameParameter("email")
-                                .passwordParameter("password")
-                        )
+                        .failureUrl("/login?error=true")
+                        .defaultSuccessUrl("/user")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                )
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
                         .logoutSuccessUrl("/login")
