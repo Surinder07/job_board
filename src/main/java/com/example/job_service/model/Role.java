@@ -14,7 +14,6 @@ import java.util.List;
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotEmpty
@@ -23,6 +22,9 @@ public class Role {
 
     @ManyToMany(mappedBy = "roles")
     private List<User> users;
+
+    @ManyToMany(mappedBy = "roles")
+    private List<Employer> employers;
 
     public Role() {
     }

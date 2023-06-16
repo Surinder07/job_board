@@ -29,7 +29,10 @@
                     <a class="nav-link" th:href="@{/}" href="#">home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" th:href="@{/register}" href="#">Sign Up</a>
+                    <a class="nav-link" th:href="@{/register}" href="#">Sign Up for Talent</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{/registerEmployer}" href="#">Sign Up for Employer</a>
                 </li>
 
             </ul>
@@ -61,7 +64,10 @@
                 <input type="submit" value="Login" class="btn btn-primary btn-block">
                 <br>
                 <span>Don't have an account <a class="linkControl" href="./register.html"
-                                               th:href="@{/register}">Register here</a></span>
+                                               th:href="@{/register}">Register for talent</a>
+                    OR
+                <a class="linkControl" href="./registerEmployer.html"
+                   th:href="@{/registerEmployer}">Register for Employer</a></span>
 
             </form>
             <br>

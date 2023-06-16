@@ -20,5 +20,6 @@ public class JobServiceApplication implements CommandLineRunner {
     public void run(String... args) throws Exception {
         roleRepo.save(new Role(1, "ROLE_ADMIN"));
         roleRepo.save(new Role(2, "ROLE_USER"));
+        roleRepo.save(new Role(3,"ROLE_EMPLOYER"));
     }
 }
