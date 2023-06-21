@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!--    <meta charset="UTF-8">-->
+  <!--    <title>Title</title>-->
+</head>
+<body>
+<table>
+  <thead>
+  <th>companyName</th>
+  <th>jobid</th>
+  <th>jobTitle</th>
+  <th>jobType</th>
+  <th>jobDescription</th>
+  <th>startDate</th>
+  <th>vacancies</th>
+  <th>address</th>
+  <th>salary</th>
+  <th>benefits</th>
+  </thead>
+  <tbody>
+<!--  <tr th:if="${courses.empty}">-->
+<!--    <td> No courses available</td>-->
+<!--  </tr>-->
+  <tr th:each="job: ${jobs}">
+    <td th:text="${job.companyName}"></td>
+    <td th:text="${job.jobid}"></td>
+    <td th:text="${job.jobTitle}"></td>
+    <td th:text="${job.jobType}"></td>
+    <td th:text="${job.jobDescription}"></td>
+    <td th:text="${job.startDate}"></td>
+    <td th:text="${job.vacancies}"></td>
+    <td th:text="${job.address}"></td>
+    <td th:text="${job.salary}"></td>
+    <td th:text="${job.benefits}"></td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>
