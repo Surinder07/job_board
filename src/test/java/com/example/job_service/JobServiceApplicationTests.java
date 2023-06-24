@@ -10,4 +10,9 @@ class JobServiceApplicationTests {
     void contextLoads() {
     }
 
+    @Test
+    public void dummyTest(){
+
+    }
+
 }
