@@ -1,20 +1,15 @@
-package com.example.job_service.Controller;
+package com.example.job_service.controller;
 
-import com.example.job_service.Model.Posts;
-import com.example.job_service.Service.PostService;
+import com.example.job_service.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
 
 @Controller
 public class WebController {
+
     @Autowired
     PostService postService;
 
