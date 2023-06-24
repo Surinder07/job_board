@@ -1,6 +1,6 @@
-package com.example.job_service.Repository;
+package com.example.job_service.repo;
 
-import com.example.job_service.Model.Posts;
+import com.example.job_service.model.Posts;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Component;
