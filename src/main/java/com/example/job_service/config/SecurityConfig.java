@@ -8,7 +8,9 @@ import org.springframework.context.annotation.Configuration;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -58,11 +60,18 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Autowired
+    @Bean
     public void config(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(customUserDetailService);
         authenticationManagerBuilder.userDetailsService(customEmployerDetailService);
     }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer(){
+        return web -> web.ignoring().requestMatchers("/resources/**");
+    }
+
+
 
     @Bean
     public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){

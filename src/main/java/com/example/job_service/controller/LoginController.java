@@ -64,7 +64,7 @@ public class LoginController {
         userRepo.save(user);
         request.login(user.getEmail(), password);
 
-        return ("redirect:/");
+        return ("redirect:/user");
     }
     @PostMapping("/registerEmployer")
     public String registerEmployer(@ModelAttribute("employer") Employer employer, HttpServletRequest request) throws SecurityException, ServletException, NoSuchFieldException {
@@ -80,7 +80,7 @@ public class LoginController {
         employer.setRoles(roles);
         employerRepo.save(employer);
         request.login(employer.getEmail(), password);
-        return ("redirect:/");
+        return ("redirect:/employer");
     }
 
     @GetMapping("/user")
