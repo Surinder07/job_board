@@ -60,7 +60,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Autowired
     public void config(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder.userDetailsService(customUserDetailService);
         authenticationManagerBuilder.userDetailsService(customEmployerDetailService);
