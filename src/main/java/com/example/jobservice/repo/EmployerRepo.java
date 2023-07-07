@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Component
+
 public interface EmployerRepo extends JpaRepository<Employers, Integer> {
     Optional<Employers> findEmployersByEmail(String email);
 }

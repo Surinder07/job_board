@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 public class EmployerRegisterController {
 
@@ -23,7 +25,7 @@ public class EmployerRegisterController {
     private RoleRepo roleRepo;*/
 
     @PostMapping("/registerEmployer")
-    public ResponseEntity<Employers> registerEmployer(@RequestBody Employers employer) throws SecurityException, ServletException, NoSuchFieldException {
+    public ResponseEntity<Employers> registerEmployer(@RequestBody Employers employer) throws SecurityException, ServletException, NoSuchFieldException, URISyntaxException {
 
         /*List<Roles> roles = new ArrayList<>();
 
@@ -31,8 +33,8 @@ public class EmployerRegisterController {
 
         roles.add(roleRepo.findById(3).get());
         employer.setRoles(roles);*/
-        employerRepo.save(employer);
-        return ResponseEntity.created(null).build();
+        Employers employers = employerRepo.save(employer);
+        return ResponseEntity.created(new URI("/registerEmployer/" + employers.getId())).body(employers);
     }
     @GetMapping("/employers")
     public List<Employers> registeredEmployers() {return employerRepo.findAll();}

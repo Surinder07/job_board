@@ -1,75 +1,33 @@
-import logo from './logo.svg';
-import React, {Component} from 'react';
+
+import React from 'react';
+import { BrowserRouter as Router , Route, Switch } from 'react-router-dom';
 import './App.css';
-import {List} from "reactstrap";
+import ListEmployerCmp from './components/ListEmployerCmp';
+import FooterCmp from './components/FooterCmp';
+import HeaderCmp from './components/HeaderCmp';
 
-/*
-const App = () => {
 
-  const [employers, setEmployers] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-
-    fetch('/employers')
-        .then(response => response.json())
-        .then(data => {
-          setEmployers(data);
-          setLoading(false);
-        })
-  }, []);
-
-  if (loading) {
-    return <p>Loading...</p>;
-  }
-
+function App() {
   return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <div className="App-intro">
-            <h2>Employer List</h2>
-            {employers.map(emp=> emp.email)}
+
+    <div>
+      <Router>
+        <div >
+          <HeaderCmp />
+          <div className='container'>
+          
+            <Switch> 
+              <Route   exactpath='/' Component={ListEmployerCmp}><ListEmployerCmp /></Route>
+              <Route  exact path='/employers' Component={ListEmployerCmp} ><ListEmployerCmp /></Route>
+              {/* <ListEmployerCmp /> */}
+            </Switch>
           </div>
-        </header>
-      </div>
-  );
-}*/
+          <FooterCmp />
+        </div>
+      </Router>
+    </div>
 
-class App extends Component {
-    state = {
-        clients: []
-    };
-
-    async componentDidMount() {
-        const response = await fetch('/employers');
-        const body = await response.json();
-        this.setState({clients: body});
-/*        client({method: 'GET', path: '/employers'}).done(response => {
-            this.setState({employees: response.entity.employees});
-        });*/
-    }
-
-    render() {
-        const {clients} = this.state;
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <div className="App-intro">
-                        <h2>Employees</h2>
-                       {clients.map(client =>
-                            <div key={client.id}>
-                                {client.password} ({client.email})
-                            </div>
-                        )}
-
-                    </div>
-                </header>
-            </div>
-        );
-    }
+  )
 }
 
 
